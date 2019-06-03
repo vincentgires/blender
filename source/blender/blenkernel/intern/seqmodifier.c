@@ -172,7 +172,7 @@ static void colorBalance_init_data(SequenceModifierData *smd)
   cbmd->color_multiply = 1.0f;
 
   for (c = 0; c < 3; c++) {
-    cbmd->color_balance.lift[c] = 1.0f;
+    cbmd->color_balance.lift[c] = 0.0f;
     cbmd->color_balance.gamma[c] = 1.0f;
     cbmd->color_balance.gain[c] = 1.0f;
   }

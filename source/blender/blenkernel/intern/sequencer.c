@@ -2273,7 +2273,7 @@ static StripColorBalance calc_cb(StripColorBalance *cb_)
   int c;
 
   for (c = 0; c < 3; c++) {
-    cb.lift[c] = 2.0f - cb.lift[c];
+    cb.lift[c] = 1.0f - cb.lift[c];
   }
 
   if (cb.flag & SEQ_COLOR_BALANCE_INVERSE_LIFT) {
