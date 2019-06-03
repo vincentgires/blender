@@ -47,8 +47,8 @@ void ntreeCompositColorBalanceSyncFromLGG(bNodeTree *UNUSED(ntree), bNode *node)
   int c;
 
   for (c = 0; c < 3; ++c) {
-    n->slope[c] = (2.0f - n->lift[c]) * n->gain[c];
-    n->offset[c] = (n->lift[c] - 1.0f) * n->gain[c];
+    n->slope[c] = (1.0f - n->lift[c]) * n->gain[c];
+    n->offset[c] = n->lift[c] * n->gain[c];
     n->power[c] = (n->gamma[c] != 0.0f) ? 1.0f / n->gamma[c] : 1000000.0f;
   }
 }
@@ -60,7 +60,7 @@ void ntreeCompositColorBalanceSyncFromCDL(bNodeTree *UNUSED(ntree), bNode *node)
 
   for (c = 0; c < 3; ++c) {
     float d = n->slope[c] + n->offset[c];
-    n->lift[c] = (d != 0.0f ? n->slope[c] + 2.0f * n->offset[c] / d : 0.0f);
+    n->lift[c] = (d != 0.0f ? n->offset[c] / d : 0.0f);
     n->gain[c] = d;
     n->gamma[c] = (n->power[c] != 0.0f) ? 1.0f / n->power[c] : 1000000.0f;
   }
@@ -70,7 +70,7 @@ static void node_composit_init_colorbalance(bNodeTree *UNUSED(ntree), bNode *nod
 {
   NodeColorBalance *n = node->storage = MEM_callocN(sizeof(NodeColorBalance), "node colorbalance");
 
-  n->lift[0] = n->lift[1] = n->lift[2] = 1.0f;
+  n->lift[0] = n->lift[1] = n->lift[2] = 0.0f;
   n->gamma[0] = n->gamma[1] = n->gamma[2] = 1.0f;
   n->gain[0] = n->gain[1] = n->gain[2] = 1.0f;
 

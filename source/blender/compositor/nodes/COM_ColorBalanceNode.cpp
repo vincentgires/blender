@@ -44,7 +44,7 @@ void ColorBalanceNode::convertToOperations(NodeConverter &converter,
 
     float lift_lgg[3], gamma_inv[3];
     for (int c = 0; c < 3; c++) {
-      lift_lgg[c] = 2.0f - n->lift[c];
+      lift_lgg[c] = 1.0f - n->lift[c];
       gamma_inv[c] = (n->gamma[c] != 0.0f) ? 1.0f / n->gamma[c] : 1000000.0f;
     }
 
